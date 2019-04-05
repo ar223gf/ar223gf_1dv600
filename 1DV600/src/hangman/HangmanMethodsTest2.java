@@ -4,17 +4,17 @@
 package hangman;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.IOException;
+
 import hangman.HangmanMethods;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
-class HangmanMethodsTest2 
-{
+class HangmanMethodsTest2 {
 
 	HangmanMethods object1;
 	public static String theWord;
-	public static int[] positions;
 
 	@BeforeEach
 	void startB() {
@@ -23,48 +23,75 @@ class HangmanMethodsTest2
 
 	@Test
 	public void fortheLine() {
-		//It should Create An StringBuilder Of UnderScores
-		String stringOfTestingWord = ("AWord");
+		// It should Create An StringBuilder Of UnderScores
+		String stringOfTestingWord = ("aword");
 		StringBuilder MethodResult = object1.theLine(stringOfTestingWord);
-		StringBuilder ExpectedResult = null;
-		ExpectedResult.append("-----");
-		assertEquals(ExpectedResult, MethodResult);
+		StringBuilder ExpectedResult = new StringBuilder();
+		for (int i = 0; i < stringOfTestingWord.length(); i++) {
+			ExpectedResult.append("-");
+		}
+		assertEquals(ExpectedResult.toString(), MethodResult.toString());
+
+	}
+
+	@Test
+	public void secodFortheLine() {
+		// It should Create An StringBuilder Of UnderScores
+		String stringOfTestingWord = ("newword");
+		StringBuilder MethodResult = object1.theLine(stringOfTestingWord);
+		StringBuilder ExpectedResult = new StringBuilder();
+		for (int i = 0; i < stringOfTestingWord.length(); i++) {
+			ExpectedResult.append("-");
+		}
+		assertEquals(ExpectedResult.toString(), MethodResult.toString());
 	}
 
 	@Test
 	public void forWinnerchecker() {
-		//It should Check If The String Has Any UnderScore
-		String stringOfTestingWord = ("AWord");
-		boolean ExpectedResult = false;
+		// It should Check If The String Has Any UnderScore
+		String stringOfTestingWord = ("aword");
+		boolean ExpectedResult;
+		ExpectedResult = true;
 		boolean MethodResult = object1.Winnerchecker(stringOfTestingWord);
 		assertEquals(ExpectedResult, MethodResult);
 	}
 
 	@Test
-	public void forChosingWord()
-	{
-		//It Should Return A Word Within MyWords
-		boolean resultSecond = (Boolean) null;
-		theWord = object1.ChosingWord();
-		for (int i = 0; i<object1.WordsForHangMan.length;i++)
-			if(object1.WordsForHangMan[i].equals(theWord)==true)
-			{
-				resultSecond = true;
-			}
+	public void SecondforWinnerchecker() {
+		// It should Check If The String Has Any UnderScore
+		String stringOfTestingWord = ("neword");
 		boolean ExpectedResult = true;
-		assertEquals(ExpectedResult, resultSecond);
-
+		boolean MethodResult = object1.Winnerchecker(stringOfTestingWord);
+		assertEquals(ExpectedResult, MethodResult);
 	}
-	
+
 	@Test
-	public void forcheckerPositins()
-	{
-		//It should return an Array contain the index number of the first and other character of the input entered by the player
-		char charTest = theWord.charAt(0);
-		int[] arrayTest = object1.checkerPositins(charTest);
-		
-		
+	public void forInputChecker() {
+		// It should check if the input is a letter
+		char charTest = 'c';
+		boolean result = false;
+		try {
+			result = object1.inputChecker(charTest);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		boolean ExpectedResult = true;
+		assertEquals(ExpectedResult, result);
 
 	}
 
+	@Test
+	public void secindForInputChecker() {
+		// It should check if the input is a letter
+		char charTest = 'c';
+		boolean result = false;
+		try {
+			result = object1.inputChecker(charTest);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		boolean ExpectedResult = true;
+		assertEquals(ExpectedResult, result);
+
+	}
 }
